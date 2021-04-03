@@ -1,0 +1,27 @@
+\chapter{Compound Change Patterns}
+\label{chap:compound-changes}
+
+To provide high-level warning messages of API evolution, we need insight into what changes took place and the original intents of framework developers. This requires that we understand the compound changes which are observed as atomic change combinations between two versions of framework source code. Hence we studied real world Python frameworks and summarized the types of compound changes observed in their evolution process.
+
+\section{Subject Selection}
+
+We searched on the popular code hosting platform GitHub with the keyword rename, relocation, and relocate under the topic topic:python. For every project hosted on GitHub, it provides three metrics to indicate the popularity of a project, namely stars, forks, and watches. We sorted the search results by a weighted measure of the three metrics, and selected the top repository from three popular categories: \textit{TensorFlow} in deep learning, \textit{Pandas} in data analytics, and \textit{Django} in web developement. We analyzed the commit histories of those projects and collect a total of 535 commit records as the basis of our findings.
+
+\section{Change Patterns}
+
+\begin{enumerate}
+  \item \textbf{Function Renaming}
+  The most common function renaming would lead to missing module attribute error in old client code, and in the special case of adding or removing the leading underscore in a function's name, the function changes between public (no leading underscore in function name) and weakly private (with leading underscore in function name). We want to identify this kind of compound changes in the hope of providing useful fix options to client programmers when they call an obsolete API, that we suggest using the matching API in the newer version of this framework, as we deduced that it is renamed. On the contrary, if the invoked API doesn't match any APIs in the renewed framework packages, we would inform the client developer that it is abandoned.
+
+  \item \textbf{Parameter Compound Changes}
+  Other than adding or deleting parameters of a function, which are atomic changes, the most common changes to parameters are to their data types and default values. These include modifying type hints in function definitions, and adding, deleting, or changing parameters' default values. Renaming parameters would not usually cause compatibility issues in client code, but there is also a special senario of switching between \textit{self} and \textit{cls} in a class method definition. Placing \textit{self} as the first parameter of the function makes it an instance method, which can  be invoked only after the class has been instantiated. While changing \textit{self} to \textit{cls} makes the function a class method, which can be called without an instance of the class.
+
+  \item \textbf{Function Return Type Change}
+  Changes of function return type are also based on type hints, including adding, deleting, and changing the function's return type hint.
+
+  \item \textbf{Function Relocation}
+  Relocating a function including migrating it to a different spot within the same source file and moving it to another source file. This add workloads to our tool as cross-file relocation cannot be identified in the analysis of a single source file, which we rely on to detect the rest of the above compound changes.
+
+\end{enumerate}
+
+The above edit actions would usually be associated with other modifications to the functions' internal implementations. We need to take into consideration that changes in function implementations are the most common in framework evolutions, with or without changing the functions' names. We plan to match renamed APIs by generating and evaluating the edit script of two versions of a single source file.

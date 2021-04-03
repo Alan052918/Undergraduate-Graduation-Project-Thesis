@@ -1,8 +1,0 @@
-\chapter{Introduction}
-\label{chap:introduction}
-
-Python is a popular dynamic programming language known for its relatively free form and powerful development frameworks, thus fulfilling the need of both programming beginners and professional programmers. Massive amount of softwares in various deciplines including deep learning, data analytics, and web services heavily rely on frameworks written in Python, such as TensorFlow, Pandas, and Django, to power their client applications. This have seen it boost in popularity over recent decades.
-
-The same as frameworks written in other programming languages, Python frameworks' APIs evolve through time in order to be satisfactory. Adding bugfixes and feature implementations into existing APIs are seen commonly, while API deprecations and updates might also occur during structural redesign or refactoring in major releases. Among all change patterns in Python API evolution, some of which are backward-compatible and would retain the integrity of dependent client applications, often referred to as non-breaking changes. While others would cause compilation or runtime errors that obstruct client programs using APIs prior to these changes, called breaking changes.
-
-A previous work looked into the common patterns in Python API evolution and compatibility issues incurred by breaking changes, and built a tool called PyCompat to automatically detect API misuse caused by breaking changes \cite{9054800}. But they didn't manage to automate the detection of compound API changes such as method renaming or relocation. In this undergraduate graduation project I would try to solve this problem by using tree-differencing to gen

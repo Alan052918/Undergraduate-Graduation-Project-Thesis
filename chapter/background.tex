@@ -2,17 +2,38 @@
 \label{chap:background}
 
 \section{The Python Programming Language}
+% A dynamic language; why calling missing API can only be reported until runtime
 
-Python is a popular dynamic programming language.
+Python is dynamic programming language, the interpreter translates Python source code contained in a .py file to Python byte code and store it in a .pyc file. And it executes many common programming behaviors such as program extension, code insertion, object and definition extension, and type system modification which static programming languages perform during compilation~\cite{enwiki:dpl}. Depending on the arguments passed into a Python interpreter, it can read and execute single lines of command or command blocks interactively when connected to a tty device's standard input, or it can execute all statements\footnote{Here "statement" and "command" are used interchangeably} in a Python source file at once when called when the input is a file.
+
+As a strongly typed programming language, data types of Python variables are tracked cannot be implicitly changed by the interpreter to compromise for the successful execution of the current command. But as a dynamically-typed programming language, programmers have great freedom of explicitly changing the type of a variable by assigning it new values, and variable types cannot be checked or retrieved until runtime. Due to lack of checkings during interpretation, errors such as invocations of undefined APIs, 
 
 \section{Python API Evolution}
+% Briefly summarize Hengcheng and Zhaoxu's findings
 
-There are some patterns in the evolution of Python APIs.
+There are 14 types of change patterns found in Python framework evolution, 5 of which are specific to Python frameworks in comparison to Java frameworks due to the language features of Python. This evolution might induce crashes, including 10 types of runtime exceptions, or unexpected behaviors in client applications, more frequently than those in Java frameworks and Java client applications~\cite{DBLP:conf/wcre/ZhangZWTLX20}.
 
-\section{Compound Changes}
+\subsection{Breaking and Non-breaking Changes}
+% Distinguish between breaking/non-breaking changes
 
-What are the compound changes?
+According to their effects, API changes can be classified into \textit{breaking changes} and \textit{non-breaking changes}~\cite{api-evo-refactoring}. Among the observed Python framework evolution patterns, some changes are not backward compatible and would induce compilation or runtime problems if the client program invokes obsolete APIs after updating dependent framework packages to newer versions. These changes that would lead to exceptions or unexpected behaviors are called breaking changes.
+
+\subsection{Atomic and Compound Changes}
+% Distinguish between atomic/compound changes
+
+From the perspective of observing differences between two versions of a source file, atomic changes are insertion of new code and deletion of old code. This is different from the perspective of performing actions that produce those differences, in the case that an update action developer takes would be observed as a delete action and an insertion action in the aftermath, making it a compound change in our definition. An empirical study on compound changes by our definition will be discussed in chapter \hyperref[chap:compound-changes]{Compound Changes}.
+
+Automation of detecting such compound changes is an important goal this project aims to achieve, as previous tools did not deliver. And comprehending the intents of such changes would help provide better API evolution and usage messages to client software developers which is the output of our tool.
 
 \section{Tree Differencing}
 
-I use tree-differencing to help detecting API renamings.
+The tree-to-tree correction problem was first studied in~\cite{tree-edit-p},~\cite{tree-correction-p}. It is a high-dimensional generalization of the string-to-string correction problem, and aims to determine the minimum cost of edit operations required to transform one tree to another. Since a Python source program could be parsed into an AST, tree-differencing algorithms could be applied to unmask the actual changes underneath different library\footnote{Here "library" and "framework" are also used interchangeably} release versions, hence providing client application developers with more thorough and accurate warnings and suggestions about which renewed API to use, rather than just printing generic warnings like missing module attributes.
+
+In this project we use the tree-differencing algorithm described in~\cite{DBLP:conf/kbse/FalleriMBMM14}.
+
+\subsection{Edit Action and Edit Script}
+
+We take into account four types of edit actions: addition, removal, update, and move. For the AST of a program, the first two types of edit actions insert or delete tree nodes or subtrees to or from the AST. An update operation modifies the type of a tree node, resulting in a mutation of variable names, rvalue contents, arithmetic operators, comparison operators, conditional operators, and etc. Lastly, a move operation relocates a node or a subtree to another place in the AST. 
+
+An edit script is a sequence of edit actions made to a source file that transform it between two versions.
+
