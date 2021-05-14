@@ -6,7 +6,7 @@
 
 \begin{enabstract}
 
-  Python is a popular dynamic programming language that has thrived in the past decade with massive applications in various deciplines. Python frameworks evolve to resist the tendency to progressively grow useless with time. In the evolution of Python frameworks, compatibility issues comes with the increasing complication of framework release versions. We investigated the compound change patterns occurred in Python framework evolution and built a tool to automatically detect such changes using a tree-differencing algorithm. \textit{Experiments on real-world projects show the capabilities of our tool.}
+  Python is a popular dynamic programming language that has thrived in the past decade with massive applications in various disciplines. Python frameworks evolve to resist the tendency to progressively grow useless with time. In the evolution of Python frameworks, compatibility issues come with the increasing complication of framework release versions. I investigated the compound change patterns that occurred in Python framework evolution by conducting an empirical study of commit histories of 3 popular Python frameworks. Then I built a tool \textit{ccdetector} that statically analyzes the edit script and abstract syntax trees of an evolved Python source file to automatically detect high-level changes with the help of a tree-differencing tool. Experiments on real-world projects showed that the tool could successfully detect predefined high-level changes and sort them into correct categories.
 
 \enkeywords{Python, API Evolution, tree differencing, dynamic programming language}
 
