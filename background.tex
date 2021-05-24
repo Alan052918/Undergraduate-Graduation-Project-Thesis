@@ -16,12 +16,21 @@ There are 14 types of change patterns found in Python framework evolution, 5 of 
 \subsection{Breaking and Non-breaking Changes}
 % Distinguish between breaking/non-breaking changes
 
-Based on their effects, API changes can be classified into \textit{breaking changes} and \textit{non-breaking changes}~\cite{api-evo-refactoring}.
+Based on their effects, API changes can be classified into \textit{breaking changes} and \textit{non-breaking changes}~\cite{api-evo-refactoring} (\hyperref[lst:break-nonbreak-change]{Listing 2.1}).
 
 \begin{enumerate}
 	\item \textbf{Breaking Changes} Among the observed Python framework evolution patterns, it is noticed that some changes are not backward-compatible and if client programs invoked obsolete APIs after updating dependent framework packages to newer versions that introduced those kinds of changes, they would suffer from compilation complaints or runtime problems. These changes that would lead to exceptions or unexpected behaviors are called \textit{breaking changes}.
 	\item \textbf{Non-breaking Changes} Contrary to breaking changes, \textit{non-breaking changes} do not obstruct previously existing APIs, though could insert new APIs. Dependencies that have gone through non-breaking changes in updates would not cause any exceptions or unexpected behaviors in client programs.
 \end{enumerate}
+
+\begin{figure}[!t]
+	\lstinputlisting[
+		language=diff,
+		caption={Breaking \& Non-breaking changes},
+		label={lst:break-nonbreak-change}
+	]{code_snippets/break_nonbreak_changes.diff}
+	\vspace{-5mm}
+\end{figure}
 
 \subsection{Atomic and Compound Changes}
 % Distinguish between atomic/compound changes
@@ -40,7 +49,13 @@ In this project, I use the tree-differencing algorithm described in~\cite{DBLP:c
 
 The difference between two Python source files, specific to our discussion two versions of the same file, can be revealed as the difference in their ASTs, which can be further summarized as a set of changes in various positions of the AST of the earlier version file.
 
-\textit{Edit actions} are the smallest units of similar and insightful changes which are classified into categories. The sequence of edit actions that together transform the AST of the earlier file to later AST is called an \textit{edit script}.
+\textit{Edit actions} are the smallest units of similar and insightful changes which are classified into categories. The sequence of edit actions that together transform the AST of the earlier file to later AST is called an \textit{edit script} (\hyperref[fig:edit-action-script]{Figure 2.1}).
+
+\begin{figure}
+	\caption{Edit actions and edit script}
+	\label{fig:edit-action-script}
+	\includegraphics[width=\textwidth]{edit-action-script.png}
+\end{figure}
 
 \section{GumTree}
 
@@ -58,5 +73,3 @@ GumTree defines 6 detectable types of edit actions to power its analysis.
 	\item \textbf{Move} Relocating a subtree to a different position of the AST.
 	\item \textbf{Update} Replacing a single node with another one.
 \end{enumerate}
-
-% TODO: add class diagram for edit actions

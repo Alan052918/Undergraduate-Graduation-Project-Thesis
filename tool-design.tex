@@ -108,6 +108,7 @@ A major concern is the sequential order in which we detect the four general cate
 \tikzstyle{line} = [draw, very thick, -latex']
 \tikzstyle{cloud} = [ellipse, draw, text width=6em, node distance=2.5cm, minimum height=2em]
 
+% TODO: Change this figure to ppt version
 \begin{figure}
 	\caption{Change detection routine}
 	\label{fig:change-detect-routine}
@@ -143,7 +144,8 @@ Function renaming changes are recorded in an \textit{Update} action that changes
 \begin{algorithm}
 	\label{algo:function-renaming-detection}
 	\caption{Function renaming detection algorithm}
-	\begin{algorithmic}
+	\SetAlgoLined
+	\begin{algorithmic}[1]
 		\REQUIRE Edit script $S$ and collection of function renaming changes $R$
 		\FORALL{$A \in S$}
 			\STATE $node \gets$ getNode($A$);
@@ -171,12 +173,15 @@ Function renaming changes are recorded in an \textit{Update} action that changes
 
 Parameter changes include \textit{Parameter Insertion}, \textit{Parameter Removal}, \textit{Parameter Normal Update}, and \textit{cls/self Switch}. A parameter change record in ccdetector's output includes the name of the function whose parameter changed, the old and renewed parameter names, and the specific change type (\hyperref[fig:ccdetector-class-design]{Figure 4.1}).
 
-Python supports many kinds of special parameters other than normal ones, in Python 3 it introduced the \textit{* (a bare asterisk)} operator to be placed among parameters (\hyperref[fig:star-none]{Figure 4.4}), indicating that all parameters before this asterisk require positional arguments, while all parameters after it require keyword arguments.
+Python supports many kinds of special parameters other than normal ones, in Python 3 it introduced the \textit{* (a bare asterisk)} operator to be placed among parameters (\hyperref[lst:asterisk-op]{Figure 4.4}), indicating that all parameters before this asterisk require positional arguments, while all parameters after it require keyword arguments.
 
-\begin{figure}
-	\caption{Bare asterisk operator and None value}
-	\label{fig:star-none}
-	\includegraphics[width=\textwidth]{asterisk-param-none-value.png}
+\begin{figure}[!t]
+	\lstinputlisting[
+		language=diff,
+		caption={Bare asterisk operator \& None default value},
+		label={lst:asterisk-op}
+	]{code_snippets/asterisk_operator.diff}
+	\vspace{-5mm}
 \end{figure}
 
 \begin{enumerate}
@@ -186,19 +191,10 @@ Python supports many kinds of special parameters other than normal ones, in Pyth
 
 ccdetector automatically checks if the target function of a parameter change operation has been renamed in the findings of \hyperref[subsec:func-rename-detect]{Function Renaming Detection}, and record the current name of the target function.
 
-%\begin{figure}[t!]
-%	\lstinputlisting[
-%	language=Python,
-%	caption=Caption,
-%	label={lst:tf-rename}
-%	]{code_snippets/param_changes.py}
-%	\vspace{-7mm}
-%\end{figure}
-
 \begin{algorithm}
 	\label{algo:parameter-change-detection}
 	\caption{Parameter change detection algorithm}
-	\begin{algorithmic}
+	\begin{algorithmic}[1]
 		\REQUIRE Edit script $S$ and collection of parameter changes $R$
 		\FORALL{$A \in S$}
 			\STATE $node \gets$ getNode($A$);
@@ -260,7 +256,7 @@ A parameter default value change record's attributes contain the names of the fu
 
 \begin{algorithm}
 	\caption{Parameter default value change detection algorithm}
-	\begin{algorithmic}
+	\begin{algorithmic}[1]
 		\REQUIRE Edit script $S$, collection of parameter insertions $I$, collection of parameter deletions $D$, collection of added nodes $A$, collection of removed nodes $M$, and collection of parameter default value changes $R$
 		\FORALL{$pi \in I$ $pd \in D$}
 			\STATE $node \gets$ getNode($pi$);
@@ -310,7 +306,7 @@ A parameter default value change record's attributes contain the names of the fu
 \begin{algorithm}
 	\caption{Check for parameter default value update/removal}
 	\label{algo:check-param-update-remove}
-	\begin{algorithmic}
+	\begin{algorithmic}[1]
 		\REQUIRE Action node $n$, collection of added nodes $A$, collection of removed nodes \\
 		$M$, and collection of parameter default value changes $R$
 		\STATE $b \gets False$;
@@ -336,7 +332,7 @@ Return annotations are type hints in the function signature indicating the type 
 \begin{algorithm}
 	\caption{Return type change detection algorithm}
 	\label{algo:return-change-detect}
-	\begin{algorithmic}
+	\begin{algorithmic}[1]
 		\REQUIRE Edit script $S$, collection of added nodes $A$, collection of removed nodes \\
 		$M$, and collection of return type changes $R$
 		\FORALL{$A \in S$}

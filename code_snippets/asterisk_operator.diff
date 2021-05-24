@@ -1,0 +1,2 @@
+- def __init__(self, message=None, code=None, whitelist=None):
++ def __init__(self, message=None, code=None, allowlist=None, *, whitelist=None):

@@ -1,0 +1,12 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+Python is a popular dynamic programming language. Development frameworks written in Python thrived across multiple disciplines in recent decades, including \textit{TensorFlow} for deep learning, \textit{Pandas} for data analytics, and \textit{Django} for web services. The rule of Continuing Change discloses that programs either undergo continual change or become progressively less useful over time~\cite{evo-laws}. Akin to frameworks developed in other programming languages, Python frameworks obey this rule. However, the complication of framework release versions induces compatibility issues when the invoked APIs do not align with the APIs provided by the packages installed. Using the wrong version of framework APIs might induce compilation or runtime problems.
+
+The tool \textit{PyCompat} from previous work tried to provide API incompatibility warnings for client Python programs by building a knowledge base of API evolution history of dependent frameworks, and check for bugs against that konwledge base~\cite{DBLP:conf/wcre/ZhangZWTLX20}. In this conference paper it described the detection of API changes and the construction of the knowledge base as a semi-automated process. As part of the journal extension of this work, I built a tool \textit{ccdetector} which automatically detects the changes in framework implementations.
+To summarize, this thesis accomplishes two major tasks:
+
+\begin{itemize}
+  \item Analyzed three real-world Python frameworks and collected common types of compound changes that occurred in Python API evolution.
+  \item Designed and implemented a tool \textit{ccdetector} to automatically detect high-level changes classified in the above empirical study.
+\end{itemize}

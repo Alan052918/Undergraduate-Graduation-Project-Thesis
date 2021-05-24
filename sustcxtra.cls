@@ -4,14 +4,14 @@
 %
 %   Version
 %       Beta
-%   Created 
+%   Created
 %       2014.03.26 by ywg@USTC
 %   Last Modified
 %       2019.04.30 by PengYM@SUSTech
 %
 
 \RequirePackage{times}
-\RequirePackage[lined,boxed,linesnumbered,algochapter]{algorithm2e}
+\RequirePackage[ruled,vlined,linesnumbered,algochapter]{algorithm2e}
 \RequirePackage{graphicx,psfrag}
 \RequirePackage{enumerate}
 \RequirePackage{subcaption,epsfig}
@@ -55,7 +55,7 @@
 		\setCJKmainfont[BoldFont={Adobe Heiti Std}, ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
 		\setCJKsansfont{Adobe Heiti Std}
 		\setCJKmonofont{Adobe Fangsong Std}
-	
+
 		\setCJKfamilyfont{song}{Adobe Song Std}
 		\setCJKfamilyfont{hei}{Adobe Heiti Std}
 		\setCJKfamilyfont{kai}{Adobe Kaiti Std}
@@ -65,7 +65,7 @@
 		\setCJKmainfont[BoldFont={SimHei}, ItalicFont={KaiTi}]{NSimSun}
 		\setCJKsansfont{SimHei}
 		\setCJKmonofont{FangSong}
-	
+
 		\setCJKfamilyfont{song}{NSimSun}
 		\setCJKfamilyfont{hei}{SimHei}
 		\setCJKfamilyfont{kai}{KaiTi}   % XP对应 KaiTi_GB2312，Vista对应KaiTi，注意根据系统切换
@@ -86,14 +86,14 @@
 
 %在正文中无论是否在图形环境中，用 \figcaption 均可得到图形标题
 %同样，无论是否在表格环境中，用 \tabcaption 均可得到表格标题。
-\newcommand\figcaption{\def\@captype{figure}\caption} 
+\newcommand\figcaption{\def\@captype{figure}\caption}
 \newcommand\tabcaption{\def\@captype{table}\caption}
 
 %提供表格环境下p{width}加强版命令，使用L{width}等可以在指定宽度的同时指定对齐方式。
-\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp} 
-\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}} 
-\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}} 
-\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}} 
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
 
 %Superscript reference
 \newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}

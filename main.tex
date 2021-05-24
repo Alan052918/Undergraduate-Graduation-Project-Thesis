@@ -11,11 +11,28 @@
     linkbordercolor = white,
 }
 
-\usepackage{algorithm2e}
 \usepackage{algorithmic}
 \usepackage{pgf-umlcd}
 \usepackage{tikz}
 \usepackage{listings}
+\lstset{
+    breaklines=true,
+    frame=lines,
+    basicstyle=\fontfamily{SourceCodePro-TLF}\scriptsize,
+    commentstyle=\color{mygreen},
+    captionpos=b,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}
+}
+\lstdefinelanguage{diff}{
+    %basicstyle=\ttfamily\small,
+    morecomment=[f][\textcolor{red}]-,
+    morecomment=[f][\textcolor{mygreen}]+,
+    morecomment=[f][\textit]{@@},
+    %morecomment=[f][\textit]{---},
+    %morecomment=[f][\textit]{+++},
+}
+\definecolor{mygreen}{HTML}{31a354}
+
 \usetikzlibrary{matrix,shapes,arrows,positioning,chains}
 
 % 阻止hyperref宏包影响tableofcontent内容
@@ -25,15 +42,13 @@
 
 \author{Junda Ai}
 
-\entitle{Bachelor Thesis}
+\entitle{Automatic Detection of Python API Changes}
 \enauthor{Junda Ai}
 \studentid{11711310}
 \endepart{Computer Science and Engineering}
 \enmajor{Computer Science and Technology}
 \enadvisor{Prof. Yepang Liu}
-% \encoadvisor{}
-% \encoadvisorsec{}
-\ensubmitdate{April, 2021}
+\ensubmitdate{May, 2021}
 
 \begin{document}
 
@@ -41,8 +56,8 @@
 
 \frontmatter
 
-\include{chapter/honest}
-\include{chapter/preface}
+\include{honest}
+\include{preface}
 
 \tableofcontents
 %默认表格、插图、算法索引名称分别为“表格索引”、“插图索引”和“算法索引”
@@ -60,23 +75,23 @@
 %\ustcloa
 
 % 摘要
-\include{chapter/abstract}%此文件中含有中英文摘要
+\include{abstract}%此文件中含有中英文摘要
 
 \mainmatter
 
-\include{chapter/introduction}
-\include{chapter/background}
-\include{chapter/compound-changes}
-\include{chapter/tool-design}
-\include{chapter/tool-evaluation}
-\include{chapter/discussions}
-\include{chapter/conclusion}
+\include{introduction}
+\include{background}
+\include{compound-changes}
+\include{tool-design}
+\include{tool-evaluation}
+% \include{discussions}
+\include{conclusion}
 
 \backmatter
 
 \bibliographystyle{sustcbib}%{GBT7714-2005NLang-UTF8}
 \bibliography{bib/tex}
 \nocite{*} % for every item
-\include{chapter/thanks}
+\include{thanks}
 
 \end{document}
