@@ -1,0 +1,29 @@
+# Change default value of use_gpu from False to True
+- def session(self, graph=None, config=None, use_gpu=False, force_gpu=False):
++ def session(self, graph=None, config=None, use_gpu=True, force_gpu=False):
+
+# Corresponding AST
+#
+# file_input [0,84]
+#   funcdef [0,84]
+#       name: session [4,11]
+#       parameters [11,74]
+#           param [12,17]
+#               name: self [12,16]
+#               operator: , [16,17]
+#           param [18,29]
+#               name: graph [18,23]
+#               operator: = [23,24]  MISSING DEFAULT VALUE NODE
+#               operator: , [28,29]
+#           param [30,42]
+#               name: config [30,36]
+#               operator: = [36,37]  MISSING DEFAULT VALUE NODE
+#               operator: , [41,42]
+#           param [43,57]
+#               name: use_gpu [43,50]
+#               operator: = [50,51]  MISSING DEFAULT VALUE NODE
+#               operator: , [56,57]
+#           param [58,73]
+#               name: force_gpu [58,67]
+#               operator: = [67,68]  MISSING DEFAULT VALUE NODE
+#       suite [75,84]

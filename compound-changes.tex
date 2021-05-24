@@ -11,23 +11,22 @@ I searched on the popular code hosting platform GitHub with the keywords \textit
 
 \begin{enumerate}
   \item \textbf{Function Renaming}
-  The most common function renaming would lead to missing module attribute error in old client code, and in the special case of adding or removing the leading underscore in a function's name, the function changes between public (no leading underscore in function name) and weakly private (with leading underscores in function name) \hyperref[fig:access-rename]{Figure 3.1}. We want to identify this kind of compound change in the hope of providing useful fix options to client programmers when they call an obsolete API, that we suggest using the matching API in the newer version of this framework, as we deduced that it is renamed. On the contrary, if the invoked API doesn't match any APIs in the renewed framework packages, we would inform the client developer that it is abandoned.
-
-  \begin{figure}
-    \caption{Change of leading underscores during function renaming}
-    \label{fig:access-rename}
-    \includegraphics[width=\textwidth]{access-rename.png}
-  \end{figure}
-
+  The most common function renaming would lead to missing module attribute error in old client code, and in the special case of adding or removing the leading underscore in a function's name, the function changes between public (no leading underscore in function name) and weakly private (with leading underscores in function name) \hyperref[fig:access-rename]{Listing 3.1}. We want to identify this kind of compound change in the hope of providing useful fix options to client programmers when they call an obsolete API, that we suggest using the matching API in the newer version of this framework, as we deduced that it is renamed. On the contrary, if the invoked API doesn't match any APIs in the renewed framework packages, we would inform the client developer that it is abandoned.
   \item \textbf{Parameter Compound Changes}
   Other than adding or deleting parameters of a function, which are atomic changes, the most common changes to parameters are to their data types and default values. These include modifying type hints in function definitions, and adding, deleting, or changing parameters' default values. Renaming parameters would not usually cause compatibility issues in client code, but there is also a special scenario of switching between \textit{self} and \textit{cls} in a class method definition. Placing \textit{self} as the first parameter of the function makes it an instance method, which could be invoked only after the class has been instantiated. While changing \textit{self} to \textit{cls} makes the function a class method, which can be called without an instance of the class.
-
   \item \textbf{Function Return Type Change}
   Changes of function return type are also based on type hints, including adding, deleting, and changing the function's return type hint.
-
   \item \textbf{Function Relocation}
   Relocating a function including migrating it to a different spot within the same source file and moving it to another source file. This adds workloads to our tool as cross-file relocation cannot be identified in the analysis of a single source file, which we rely on to detect the rest of the above compound changes.
-
 \end{enumerate}
+
+\begin{figure}[!t]
+  \lstinputlisting[
+    language=diff,
+    caption={Change of leading underscores during function renaming},
+    label={lst:lead-underscore}
+  ]{code_snippets/lead_underscore.diff}
+  \vspace{-5mm}
+\end{figure}
 
 The above edit actions would usually be associated with other modifications to the functions' internal implementations. We need to take into consideration that changes in function implementations are the most common in framework evolutions, with or without changing the functions' names. We plan to match renamed APIs by generating and evaluating the edit script of two versions of a single source file.
