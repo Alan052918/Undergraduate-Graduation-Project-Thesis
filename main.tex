@@ -11,6 +11,7 @@
     linkbordercolor = white,
 }
 
+\usepackage{threeparttable}
 \usepackage{algorithmic}
 \usepackage{pgf-umlcd}
 \usepackage{tikz}
@@ -18,7 +19,7 @@
 \lstset{
     breaklines=true,
     frame=lines,
-    basicstyle=\fontfamily{SourceCodePro-TLF}\scriptsize,
+    basicstyle=\fontfamily{lmtt}\scriptsize,
     commentstyle=\color{mygreen},
     captionpos=b,
     prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}}
@@ -31,7 +32,12 @@
     %morecomment=[f][\textit]{---},
     %morecomment=[f][\textit]{+++},
 }
+\lstdefinelanguage{output}{
+    morecomment=[f][\textcolor{blue}]===,
+    % morecomment=[f][\textit]{##},
+}
 \definecolor{mygreen}{HTML}{31a354}
+\newcommand*{\mycode}{\fontfamily{lmtt}\selectfont}
 
 \usetikzlibrary{matrix,shapes,arrows,positioning,chains}
 

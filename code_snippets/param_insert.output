@@ -1,0 +1,5 @@
+===
+Parameter insertion
+---
+target function: render
+insert parameter: skip_cache
